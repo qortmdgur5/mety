@@ -1,9 +1,8 @@
-package com.risingcraft.mety.domain.program;
+package com.risingcraft.mety.domain.data;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,9 +11,9 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@lombok.Data
 @Entity
-public class Program {
+public class Data {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략을 데이터베이스에 맞춰 따라간다. 여기서 사용할 DB는 MariaDB
@@ -26,9 +25,11 @@ public class Program {
 
     private int round;      // 회차 ex) 1회차 , 2회차
 
-    private int RMS_CUR;    // 현재 근전도 측정값
+    private int RMS_MAX1;    // 환자 근전도 최대값1
 
-    private int RMS_MAX;    // 환자 근전도 최대값
+    private int RMS_MAX2;    // 환자 근전도 최대값2
+
+    private int RMS_MAX3;    // 환자 근전도 최대값3
 
     private int exercise_1; // 운동 퀘스트 1 측정값
 
@@ -54,6 +55,4 @@ public class Program {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
-
-
 }

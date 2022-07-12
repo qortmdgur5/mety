@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,8 +35,13 @@ public class Organization {
     @Column(nullable = false)
     private String phone;       // 기관 전화번호
 
+    @Column(nullable = false)
+    private String address;     // 기관 주소
+
     @Enumerated(EnumType.STRING)
     private Role role;    //권한 ex) 환자, 기관, 관리자
+
+    private boolean approve;    //가입승인되면 true값으로 바꿔줌
 
     private LocalDateTime createDate;   // 기관 가입날짜
 

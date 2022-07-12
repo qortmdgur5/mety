@@ -44,10 +44,6 @@ public class PrincipalDetails implements UserDetails {
         return user.getPassword();
     }
 
-    public String getName() {
-        return (String) attributes.get("name");
-    }
-
 
 
     @Override

@@ -1,5 +1,5 @@
 package com.risingcraft.mety.domain.role;
 
 public enum Role {
-    USER, ORG, ADMIN
+    ROLE_GUEST,ROLE_USER, ROLE_PREORG, ROLE_ORG, ROLE_ADMIN
 }

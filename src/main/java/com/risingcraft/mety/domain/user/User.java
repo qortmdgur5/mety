@@ -32,15 +32,18 @@ public class User {
 
     private String email;       //이메일
 
-    private Date birth;         //생일
+    private String birth;         //생일, 주민번호?
 
-    private String phone;   //유저 핸드폰번호
+    private String phone;   //유저 핸드폰번호  , 개인인증방식 핸드폰으로 할건지 주민번호로 할건지
 
     @Column(nullable = false)
-    private byte gender;    //성별
+    private boolean gender;    //성별
 
     @Column(nullable = false)
     private byte medicalInfo;   //유저 환부위치 ex) 상지 좌완, 하치 우족
+
+    @Column(nullable = false)
+    private String address;     //유저 주소
 
     @Column(nullable = false)
     private int orgId;  // 유저 해당병원 기관코드
@@ -48,6 +51,8 @@ public class User {
     private Date startDate; // 치료 프로그램 시작 날짜
 
     private boolean activate;   // 기관측 환자 활성화 버튼, ex) 환자가 기관에 내방하였을 때 기관측에서 환자정보 활성화를 on하여 프로그램에 사용자정보가 올라가 프로그램 진행가능하도록 함.
+
+    private boolean approve;    //가입승인되면 true값으로 바꿔줌
 
     @Enumerated(EnumType.STRING)
     private Role role;    //권한 ex) 환자, 기관, 관리자

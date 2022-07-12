@@ -1,5 +1,6 @@
 package com.risingcraft.mety.config.auth;
 
+import com.risingcraft.mety.domain.organization.OrganizationRepository;
 import com.risingcraft.mety.domain.user.User;
 import com.risingcraft.mety.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public PrincipalDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User userEntity = userRepository.findByUsername(username);
 

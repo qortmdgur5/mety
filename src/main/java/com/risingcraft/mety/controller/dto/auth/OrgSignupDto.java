@@ -11,13 +11,16 @@ public class OrgSignupDto {
 
     @Size(min = 2, max = 20)
     @NotBlank
-    private String orgname;   // 기관 아이디
+    private String orgname;     // 기관 아이디
 
     @NotBlank
     private String password;    // 기관 비밀번호
 
     @NotBlank
-    private String name;     // 기관 이름 ex) 병원이름
+    private String name;        // 기관 이름 ex) 병원이름
+
+    @NotBlank
+    private String address;     //기관 주소
 
     @NotBlank
     private String phone;       // 기관 번호
@@ -27,6 +30,7 @@ public class OrgSignupDto {
                 .orgname(orgname)
                 .password(password)
                 .name(name)
+                .address(address)
                 .phone(phone)
                 .build();
     }

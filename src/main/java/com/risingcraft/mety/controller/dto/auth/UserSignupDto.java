@@ -20,11 +20,14 @@ public class UserSignupDto {
 
     private String phone;
 
-    private byte gender;
+    private boolean gender;
 
     private byte medicalInfo;
 
-    private Date birth;
+    @NotBlank
+    private String address;
+
+    private String birth;
 
     private int orgId;
 
@@ -37,6 +40,7 @@ public class UserSignupDto {
                 .phone(phone)
                 .gender(gender)
                 .medicalInfo(medicalInfo)
+                .address(address)
                 .birth(birth)
                 .orgId(orgId)
                 .build();

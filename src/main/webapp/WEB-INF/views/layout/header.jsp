@@ -6,6 +6,8 @@
     <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,7 +43,9 @@
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
+              <sec:authorize access="isAnonymous()">
               <a class="nav-link" href="/user/login">Login</a>
+              </sec:authorize>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/user/signup">SignUp</a>
@@ -50,7 +54,11 @@
               <a class="nav-link" href="/user/${principal.user.id}">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
+            <sec:authorize access="isAuthenticated()">
+              <form action="/logout" method="POST">
+                                <button>로그아웃</button>
+                            </form>
+            </sec:authorize>
             </li>
           </ul>
           <form class="d-flex" role="search">

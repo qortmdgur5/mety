@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @RequiredArgsConstructor
@@ -41,7 +42,6 @@ public class UserController {
     //유저 회원가입 진행
     @PostMapping("/user/signup")
     public String userSingup(@Valid UserSignupDto userSignupDto, BindingResult bindingResult){
-
         User user = userSignupDto.toEntity();
         authService.유저회원가입(user);
         return "user/login";
@@ -52,6 +52,13 @@ public class UserController {
     public String main() {
         System.out.println("유저 메인페이지 진입");
         return "user/main";
+    }
+
+    //유저 로그아웃
+    @PostMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
     }
 
     //유저 프로필 페이지 진입

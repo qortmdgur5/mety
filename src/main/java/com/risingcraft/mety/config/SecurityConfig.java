@@ -19,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
-
 public class SecurityConfig {
     private final PrincipalDetailsService principalDetailsService;
     private final OrganizationDetailsService organizationDetailsService;
@@ -43,14 +42,14 @@ public class SecurityConfig {
                     .antMatchers("/user/**","/","/api/user/**")
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/user/signup", "/org/signup", "/user/login", "/org/login", "/").permitAll()
+                    .antMatchers("/user/signup", "/user/login", "/").permitAll()
                     .antMatchers("/user/**").hasAnyRole("USER", "ADMIN", "GUEST")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
                     .loginPage("/user/login")
                     .loginProcessingUrl("/user/login")
-                    .defaultSuccessUrl("/");
+                    .defaultSuccessUrl("/user/main");
         }
 
         @Override
@@ -71,7 +70,7 @@ public class SecurityConfig {
                     .antMatchers("/org/**","/","/api/org/**")
                     .and()
                     .authorizeRequests()
-                    .antMatchers("/user/signup", "/org/signup", "/user/login", "/org/login").permitAll()
+                    .antMatchers( "/org/signup", "/org/login").permitAll()
                     .antMatchers("/org/**").hasAnyRole("ORG", "PREORG")
                     .anyRequest().authenticated()
                     .and()
@@ -80,8 +79,10 @@ public class SecurityConfig {
                     .passwordParameter("password")
                     .loginPage("/org/login")
                     .loginProcessingUrl("/org/login")
-                    .defaultSuccessUrl("/");
+                    .defaultSuccessUrl("/org/main");
         }
+
+
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {

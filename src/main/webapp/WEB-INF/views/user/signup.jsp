@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="header.jsp"%>
 
 <h1> SignUp Page </h1>
 <button type="button" class="btn btn-link" onclick="location.href='/user/signup'">환자</button>
@@ -46,10 +46,10 @@
   </div>
   <div class="mb-3">
     <label class="form-label">담당기관</label>
-    <select class="form-control" id="orgId" name="orgId">
-      <option value="1">삼성병원</option>
-      <option value="2">엘지병원</option>
-      <option value="3">라이징크래프트병원</option>
+    <select class="form-control" id="orgName" name="orgName">
+      <option value="삼성병원">삼성병원</option>
+      <option value="엘지병원">엘지병원</option>
+      <option value="라이징크래프트병원">라이징크래프트병원</option>
     </select>
   </div>
   <div class="mb-3">

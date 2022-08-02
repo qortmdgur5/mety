@@ -1,5 +1,6 @@
 package com.risingcraft.mety.controller.dto.auth;
 
+import com.risingcraft.mety.domain.organization.Organization;
 import com.risingcraft.mety.domain.user.User;
 import lombok.Data;
 
@@ -29,7 +30,9 @@ public class UserSignupDto {
 
     private String birth;
 
-    private int orgId;
+    private String orgName;
+
+    private Organization org;
 
     public User toEntity() {
         return User.builder()
@@ -42,7 +45,7 @@ public class UserSignupDto {
                 .medicalInfo(medicalInfo)
                 .address(address)
                 .birth(birth)
-                .orgId(orgId)
+                .orgName(orgName)
                 .build();
     }
 }

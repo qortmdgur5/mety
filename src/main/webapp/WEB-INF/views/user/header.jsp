@@ -22,10 +22,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
     <!--jquery 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <!-- datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Style -->
 
   </head>
   <body>
+  <!--principalId 담아두는 곳 -->
+  <input type="hidden" id="principalId" value="${principal.user.id}">
 
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
@@ -36,17 +42,23 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
+              <a class="nav-link active" aria-current="page" href="/user/main">Home</a>
             </li>
             <sec:authorize access="isAnonymous()">
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/signup">SignUp</a>
-                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user/login">로그인</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user/signup">회원가입</a>
+              </li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
+              <li class="nav-item">
+                <a class="nav-link" href="/user/${principal.user.id}">프로필</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user/${principal.user.id}/myRecord">My기록</a>
+              </li>
               <li class="nav-item">
                 <form action="/logout" method="POST">
                   <button>로그아웃</button>

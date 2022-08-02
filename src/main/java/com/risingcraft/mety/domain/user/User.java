@@ -1,14 +1,14 @@
 package com.risingcraft.mety.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.risingcraft.mety.domain.organization.Organization;
 import com.risingcraft.mety.domain.role.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -46,7 +46,15 @@ public class User {
     private String address;     //유저 주소
 
     @Column(nullable = false)
-    private int orgId;  // 유저 해당병원 기관코드
+    private String orgName;  // 유저 해당병원이름
+
+    @JsonIgnoreProperties({"user"})
+    @JoinColumn(name = "orgId")
+    @ManyToOne
+    private Organization organization;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<com.risingcraft.mety.domain.data.Data> data;
 
     private Date startDate; // 치료 프로그램 시작 날짜
 
@@ -63,4 +71,5 @@ public class User {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
 }

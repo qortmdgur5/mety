@@ -12,7 +12,7 @@ public class UserUpdateDto {
     private String address;
     private String phone;
     private String email;
-    private int orgId;
+    private String orgName;
     private byte medicalInfo;
 
     public User toEntity() {
@@ -24,7 +24,7 @@ public class UserUpdateDto {
                 .address(address)
                 .phone(phone)
                 .email(email)
-                .orgId(orgId)
+                .orgName(orgName)
                 .medicalInfo(medicalInfo)
                 .build();
     }

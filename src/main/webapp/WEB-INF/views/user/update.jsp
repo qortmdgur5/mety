@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="header.jsp"%>
 
 <h1> Update Page </h1>
 
@@ -36,7 +36,7 @@
   </div>
   <div class="mb-3">
     <label class="form-label">담당기관</label>
-    <input type="text" name="orgId" placeholder="담당기관" value="${principal.user.orgId}" required="required"/>
+    <input type="text" name="orgName" placeholder="담당기관" value="${principal.user.orgName}" required="required"/>
   </div>
   <div class="mb-3">
     <label class="form-label">통증부위</label>
@@ -46,7 +46,7 @@
   <button type="button" onclick="update(${principal.user.id})" class="btn btn-primary">변경완료</button>
 </form>
 
-<script src="/js/update.js"></script>
+<script src="/js/user/update.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>
 </body>

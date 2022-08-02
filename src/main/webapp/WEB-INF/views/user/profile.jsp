@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../layout/header.jsp"%>
+<%@ include file="header.jsp"%>
 <div>
 <h1> Profile Page </h1>
 <a href="/user/${principal.user.id}/update">변경</a>
@@ -43,7 +43,7 @@
   </div>
   <div class="mb-3">
     <label class="form-label">담당기관</label>
-    <span>${principal.user.orgId}</span>
+    <span>${principal.user.orgName}</span>
   </div>
   <div class="mb-3">
     <label class="form-label">통증부위</label>

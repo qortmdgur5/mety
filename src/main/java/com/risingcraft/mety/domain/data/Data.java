@@ -1,6 +1,9 @@
 package com.risingcraft.mety.domain.data;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.risingcraft.mety.domain.level.Level;
+import com.risingcraft.mety.domain.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -19,11 +22,14 @@ public class Data {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략을 데이터베이스에 맞춰 따라간다. 여기서 사용할 DB는 MariaDB
     private int id; //program 테이블 고유번호
 
-    private String userId;  //프로그램 사용자 id
+    @JsonIgnoreProperties({"data"})
+    @JoinColumn(name = "userId")
+    @ManyToOne
+    private User user;  //사용자 테이블 id
 
-    private int week;       // 몇주차  ex) 1주차 , 2주차
-
-    private int round;      // 회차 ex) 1회차 , 2회차
+    @JoinColumn(name = "levelCode")
+    @ManyToOne
+    private Level level;    //프로그램 레벨 코드 ex) 레벨코드 1 = 1주차 1회차, 레벨코드2 = 1주차 2회차
 
     private int RMS_MAX1;    // 환자 근전도 최대값1
 
@@ -36,6 +42,12 @@ public class Data {
     private int exercise_2; // 운동 퀘스트 2 측정값
 
     private int exercise_3; // 운동 퀘스트 3 측정값
+
+    private int recog_max_1;// 인지 퀘스트 1 최대시간
+
+    private int recog_max_2;// 인지 퀘스트 2 최대시간
+
+    private int recog_max_3;// 인지 퀘스트 3 최대시간
 
     private int recog_1;    // 인지 퀘스트 1 측정값
 
@@ -55,4 +67,6 @@ public class Data {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
+
 }

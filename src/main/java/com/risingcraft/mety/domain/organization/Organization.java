@@ -1,15 +1,12 @@
 package com.risingcraft.mety.domain.organization;
 
 import com.risingcraft.mety.domain.role.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.boot.context.properties.bind.DefaultValue;
+import com.risingcraft.mety.domain.user.User;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Builder
@@ -17,8 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
+@ToString(exclude = "user")
 public class Organization {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //번호 증가 전략을 데이터베이스에 맞춰 따라간다. 여기서 사용할 DB는 MariaDB
     private int id; // 기관 테이블 고유번호
@@ -38,10 +35,14 @@ public class Organization {
     @Column(nullable = false)
     private String address;     // 기관 주소
 
+    @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER)
+    private List<User> user;
+
     @Enumerated(EnumType.STRING)
     private Role role;    //권한 ex) 환자, 기관, 관리자
 
     private boolean approve;    //가입승인되면 true값으로 바꿔줌
+
 
     private LocalDateTime createDate;   // 기관 가입날짜
 
@@ -49,6 +50,5 @@ public class Organization {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
-
 
 }

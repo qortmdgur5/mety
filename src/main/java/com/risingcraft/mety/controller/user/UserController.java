@@ -2,9 +2,12 @@ package com.risingcraft.mety.controller.user;
 
 import com.risingcraft.mety.config.auth.PrincipalDetails;
 import com.risingcraft.mety.controller.dto.auth.UserSignupDto;
+import com.risingcraft.mety.domain.data.Data;
+import com.risingcraft.mety.domain.data.DataRepository;
 import com.risingcraft.mety.domain.user.User;
 import com.risingcraft.mety.domain.user.UserRepository;
 import com.risingcraft.mety.service.AuthService;
+import com.risingcraft.mety.service.data.DataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Supplier;
@@ -26,6 +29,7 @@ public class UserController {
 
     private final AuthService authService;
     private final UserRepository userRepository;
+    private final DataService dataService;
 
     //유저 로그인 페이지 진입
     @GetMapping("/user/login")
@@ -44,6 +48,7 @@ public class UserController {
     public String userSingup(@Valid UserSignupDto userSignupDto, BindingResult bindingResult){
         User user = userSignupDto.toEntity();
         authService.유저회원가입(user);
+        authService.유저병원코드(user.getOrgName(), user.getId());
         return "user/login";
     }
 
@@ -54,7 +59,7 @@ public class UserController {
         return "user/main";
     }
 
-    //유저 로그아웃
+    //로그아웃
     @PostMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
@@ -65,15 +70,20 @@ public class UserController {
     @GetMapping("/user/{id}")
     public String userProfile(@PathVariable int id ,@AuthenticationPrincipal PrincipalDetails principalDetails) {
         userRepository.findById(id).orElseThrow(()->new IllegalArgumentException("해당 사용자가 아닙니다."));
-        log.info("userprofile={}", principalDetails.getUser());
         return "user/profile";
     }
-
 
     //유저 프로필 변경 페이지 진입
     @GetMapping("/user/{id}/update")
     public String userUpdate(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails){
         return "user/update";
+    }
+
+    //유저 마이기록 페이지 진입
+    @GetMapping("/user/{id}/myRecord")
+    public String myRecord(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        System.out.println("유저 마이기록 페이지 진입");
+        return "user/myRecord";
     }
 
 }

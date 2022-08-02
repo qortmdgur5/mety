@@ -22,7 +22,6 @@ public class OrganizationDetailsService implements UserDetailsService {
 
     @Override
     public OrganizationDetails loadUserByUsername(String orgname) throws UsernameNotFoundException {
-        System.out.println("나 실행돼?");
 
         Organization orgEntity = organizationRepository.findByOrgname(orgname);
         log.info("orgEntity={}", orgEntity);

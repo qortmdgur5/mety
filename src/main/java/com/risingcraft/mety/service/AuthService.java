@@ -32,6 +32,10 @@ public class AuthService {
         return userEntity;
     }
 
+    public void 유저병원코드(String orgName, int id) {
+        userRepository.mSignupOrgId(orgName, id);
+    }
+
     public Organization 병원회원가입(Organization org) {
         String rawPassword = org.getPassword();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
